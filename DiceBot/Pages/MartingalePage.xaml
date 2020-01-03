@@ -1,0 +1,229 @@
+﻿<Page
+    x:Class="DiceBot.Pages.MartingalePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:DiceBot.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DiceBot"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:valuteEnum="clr-namespace:Dice.Client.Web;assembly=Dice.Client.Web"
+    xmlns:viewmodel="clr-namespace:DiceBot.ViewModel"
+    Title="MartingalePage"
+    d:DesignHeight="500"
+    d:DesignWidth="700"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewmodel:MartingaleViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converter:EnumToBoolConverter x:Key="EnumToBool" />
+    </Page.Resources>
+
+    <Grid>
+
+        <Button
+            Width="150"
+            Margin="10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding Back}"
+            Content="Назад"
+            Style="{StaticResource BaseButton}" />
+
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource BaseTextBlock}" TargetType="TextBlock">
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock Text="Настройте тактику указав с какой суммы начинать играть, какую сумму не привышать и что делать в случае проигрыша." TextWrapping="Wrap" />
+
+            <UniformGrid Margin="0,10,0,0" Columns="3">
+                <UniformGrid.Resources>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
+                        <Setter Property="Foreground" Value="{StaticResource FontColor}" />
+                        <Setter Property="FontSize" Value="{StaticResource Regular}" />
+                    </Style>
+                </UniformGrid.Resources>
+
+
+                <Button
+                    Margin="10,5"
+                    Command="{Binding _50_50}"
+                    Content="50/50"
+                    Style="{StaticResource BaseButton}" />
+                <Button
+                    Margin="10,5"
+                    Command="{Binding _95_75}"
+                    Content="95/75"
+                    Style="{StaticResource BaseButton}" />
+                <Button
+                    Margin="10,5"
+                    Command="{Binding Reset}"
+                    Content="Cбросить"
+                    Style="{StaticResource BaseButton}" />
+
+                <RadioButton Content="BTC" IsChecked="{Binding Valute, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static valuteEnum:Currencies.BTC}}" />
+
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Style="{StaticResource BaseTextBlock}"
+                    Text="{Binding Balance, StringFormat=Баланс: {0:n8}}"
+                    TextAlignment="Center" />
+
+                <RadioButton Content="DOGE" IsChecked="{Binding Valute, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static valuteEnum:Currencies.Doge}}" />
+                <RadioButton Content="LTC" IsChecked="{Binding Valute, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static valuteEnum:Currencies.LTC}}" />
+                <RadioButton Content="ETH" IsChecked="{Binding Valute, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static valuteEnum:Currencies.ETH}}" />
+
+
+
+                <RadioButton Content="XMR" IsChecked="{Binding Valute, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static valuteEnum:Currencies.XMR}}" />
+
+
+                <TextBox
+                    Margin="10,5"
+                    Style="{StaticResource BaseTextBox}"
+                    Tag="Начальная ставка"
+                    Text="{Binding MartingaleSettings.StartBet, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Center" />
+                <TextBox
+                    Margin="10,5"
+                    Style="{StaticResource BaseTextBox}"
+                    Tag="Максимальная ставка"
+                    Text="{Binding MartingaleSettings.MaxBet, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Center" />
+                <TextBox
+                    Margin="10,5"
+                    Style="{StaticResource BaseTextBox}"
+                    Tag="Процент победы"
+                    Text="{Binding MartingaleSettings.WinPercent, StringFormat={}{0:n3}, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Center" />
+
+
+
+
+                <TextBlock />
+                <TextBlock VerticalAlignment="Center" Text="Если проиграли" />
+
+                <TextBlock />
+
+                <RadioButton
+                    Margin="10,0"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    IsChecked="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Multiply}}">
+                    <TextBox
+                        IsEnabled="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Multiply}}"
+                        Style="{StaticResource BaseTextBox}"
+                        Tag="Умножить"
+                        Text="{Binding MartingaleSettings.Factor, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center" />
+                </RadioButton>
+
+
+
+                <RadioButton
+                    Margin="10,0"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    IsChecked="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Divide}}">
+                    <TextBox
+                        IsEnabled="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Divide}}"
+                        Style="{StaticResource BaseTextBox}"
+                        Tag="Разделить"
+                        Text="{Binding MartingaleSettings.Factor, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center" />
+                </RadioButton>
+
+                <RadioButton
+                    Margin="10,0"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    IsChecked="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Add}}">
+                    <TextBox
+                        IsEnabled="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Add}}"
+                        Style="{StaticResource BaseTextBox}"
+                        Tag="Добавить"
+                        Text="{Binding MartingaleSettings.Factor, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center" />
+                </RadioButton>
+
+                <RadioButton
+                    Margin="10,0"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    IsChecked="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Substract}}">
+                    <TextBox
+                        IsEnabled="{Binding MartingaleSettings.Operation, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static local:Operation.Substract}}"
+                        Style="{StaticResource BaseTextBox}"
+                        Tag="Вычесть"
+                        Text="{Binding MartingaleSettings.Factor, StringFormat={}{0:n8}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center" />
+                </RadioButton>
+
+                <Button
+                    Margin="10,5"
+                    Command="{Binding Calculate}"
+                    Content="Посчитать"
+                    Style="{StaticResource BaseButton}" />
+
+
+
+                <CheckBox
+                    Margin="10,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    IsChecked="{Binding MartingaleSettings.CanChangeWinPercent}">
+                    <Grid>
+                        <TextBox
+                            IsEnabled="{Binding MartingaleSettings.CanChangeWinPercent}"
+                            Style="{StaticResource BaseTextBox}"
+                            Tag="Процент победы на"
+                            Text="{Binding MartingaleSettings.ChangeWinPercent, StringFormat={}{0:n3}, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Center" />
+                    </Grid>
+                </CheckBox>
+
+
+
+                <Button
+                    Margin="10,5"
+                    Command="{Binding Load}"
+                    Content="Загрузить"
+                    Style="{StaticResource BaseButton}" />
+
+
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Style="{StaticResource BaseTextBlock}"
+                    Text="{Binding MaxBetCount, StringFormat=Хватит на: {0}}"
+                    TextAlignment="Center" />
+
+                <Button
+                    Margin="10,5"
+                    Command="{Binding Save}"
+                    Content="Сохранить"
+                    Style="{StaticResource BaseButton}" />
+
+
+            </UniformGrid>
+        </StackPanel>
+
+        <Button
+            Width="150"
+            Margin="10"
+            VerticalAlignment="Bottom"
+            Command="{Binding Start}"
+            Content="Дальше"
+            Style="{StaticResource BaseButton}" />
+    </Grid>
+</Page>

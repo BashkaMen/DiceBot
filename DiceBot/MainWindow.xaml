@@ -1,0 +1,80 @@
+﻿<Window
+    x:Class="DiceBot.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animatedframe="clr-namespace:DiceBot.Controls.AnimatedFrame"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:icon="clr-namespace:MaterialIcons;assembly=MaterialIcons"
+    xmlns:local="clr-namespace:DiceBot"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:DiceBot.ViewModel"
+    Name="window"
+    Title="DiceBot by BashkaMen"
+    Width="1200"
+    Height="800"
+    AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.DataContext>
+        <viewmodel:MainViewModel />
+    </Window.DataContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource BaseDarkBrush}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding DragMove}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <TextBlock
+                Margin="20,2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontFamily="Yu Gothic UI Semibold"
+                FontWeight="Bold"
+                Foreground="White"
+                IsHitTestVisible="False"
+                Style="{StaticResource BaseTextBlock}"
+                Text="DiceBot by BashkaMen" />
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                <Button
+                    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                    Command="{Binding Minimize}"
+                    Style="{StaticResource HeaderButton}">
+                    <icon:MaterialIcon Icon="ic_remove" />
+                </Button>
+                <!--<Button
+                    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                    Command="{Binding Maximize}"
+                    Style="{StaticResource HeaderButton}">
+                    <icon:MaterialIcon Icon="ic_crop_square" />
+                </Button>-->
+                <Button
+                    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                    Command="{Binding Close}"
+                    Style="{StaticResource HeaderButton}">
+                    <icon:MaterialIcon Icon="ic_close" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Background="{StaticResource MediumBrush}">
+            <animatedframe:AnimatedFrame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
+        </Grid>
+
+
+    </Grid>
+</Window>

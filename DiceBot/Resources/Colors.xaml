@@ -1,0 +1,42 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DiceBot.Resources">
+
+
+
+    <Color x:Key="MainDarkColor">#59B2CA</Color>
+    <SolidColorBrush x:Key="BaseDarkBrush" Color="{StaticResource MainDarkColor}" />
+
+    <Color x:Key="MainMediumColor">#6CC5DD</Color>
+    <SolidColorBrush x:Key="BaseMediumBrush" Color="{StaticResource MainMediumColor}" />
+
+    <Color x:Key="MainLightColor">#83cde2</Color>
+    <SolidColorBrush x:Key="BaseLightBrush" Color="{StaticResource MainLightColor}" />
+
+
+    <Color x:Key="SecondaryDarkColor">#f6523c</Color>
+    <SolidColorBrush x:Key="SecondaryDarkBrush" Color="{StaticResource SecondaryDarkColor}" />
+
+    <Color x:Key="SecondaryMediumColor">#f76755</Color>
+    <SolidColorBrush x:Key="SecondaryMediumBrush" Color="{StaticResource SecondaryMediumColor}" />
+
+    <Color x:Key="SecondaryLightColor">#f87d6d</Color>
+    <SolidColorBrush x:Key="SecondaryLightBrush" Color="{StaticResource SecondaryLightColor}" />
+
+
+
+    <Color x:Key="DarkColor">#FFD6D6D6</Color>
+    <SolidColorBrush x:Key="DarkBrush" Color="{StaticResource DarkColor}" />
+
+    <Color x:Key="MediumColor">#F2F2F2</Color>
+    <SolidColorBrush x:Key="MediumBrush" Color="{StaticResource MediumColor}" />
+
+    <Color x:Key="LightColor">white</Color>
+    <SolidColorBrush x:Key="LightBrush" Color="{StaticResource LightColor}" />
+
+    <SolidColorBrush x:Key="FontColor">#767676</SolidColorBrush>
+
+
+
+</ResourceDictionary>

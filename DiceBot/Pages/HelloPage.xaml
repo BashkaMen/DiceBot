@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="DiceBot.Pages.HelloPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:DiceBot.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:DiceBot.ViewModel"
+    Title="HelloPage"
+    d:DesignHeight="500"
+    d:DesignWidth="700"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewmodel:HelloViewModel />
+    </Page.DataContext>
+
+    <Grid>
+        <StackPanel Margin="10" VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style BasedOn="{StaticResource BaseTextBlock}" TargetType="TextBlock">
+                    <Setter Property="TextAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button
+                Width="300"
+                Margin="10"
+                Command="{Binding Update}"
+                Content="{Binding UpdateText}"
+                Style="{StaticResource BaseButton}" />
+
+
+            <TextBlock Text="Добро пожаловать в DiceBot." />
+            <TextBlock Text="Данная программа абсолютно бесплатна и существует на реферальной системе." />
+            <TextBlock Text="Для того что б использовать эту программу вы должны зарегистрироваться через неё." />
+            <TextBlock Text="Ваш аккаунт сохранится и вы сможете в него входить просто выбрав его." />
+            <TextBlock Foreground="{StaticResource SecondaryDarkBrush}" Text="Вы не чего не теряете став рефералом." />
+            <TextBlock Text="" />
+            <TextBlock Text="Программа не может сама проиграть или выиграть, она просто играет по вашему алгоритму и всем процесом управляете Вы и только Вы. Если Вы этого не понимаете, то просьба не использовать данную программу, дабы избежать недопониманий." TextWrapping="Wrap" />
+            <TextBlock Text="" />
+
+
+
+        </StackPanel>
+
+        <Button
+            Width="150"
+            Margin="5"
+            VerticalAlignment="Bottom"
+            Command="{Binding Next}"
+            Content="Продолжить"
+            Style="{StaticResource BaseButton}" />
+    </Grid>
+</Page>
